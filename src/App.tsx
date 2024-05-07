@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import bg from './assets/bg.png';
 import logo from './assets/logo.svg';
 import card1 from './assets/card_1.png';
+import card2 from './assets/card_2.png';
 
 type CardOption = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 0;
 
@@ -41,7 +42,6 @@ function App() {
 
 	return (
 		<>
-			<div className="background" style={{ backgroundImage: `url(${bg})` }}></div>
 			<div className="header">
 				<h2>JUGÁ Y DESCUBRÍ TODAS</h2>
 				<h1>NUESTRAS VARIEDADES</h1>
@@ -51,7 +51,7 @@ function App() {
 					<Card value={card} key={i} onFlip={handleFlip(i)} flipped={selection.includes(i)} color={(i < 14 ? i % 3 : (i + 1) % 3) as 1 | 2 | 3} />
 				))}
 			</div>
-			<div className="footer" />
+			<div className="background" style={{ backgroundImage: `url(${bg})` }}></div>
 		</>
 	);
 }
@@ -62,7 +62,7 @@ interface CardProps {
 	color: 1 | 2 | 3;
 }
 function Card({ value, onFlip, flipped, color }: CardProps) {
-	const cardImage = [card1, card1, card1, card1, card1, card1, card1, card1, card1, card1];
+	const cardImage = [card1, card2, card1, card2, card1, card2, card1, card2, card1, card2];
 	return (
 		<div className={`card ${flipped ? 'flipped' : ''}`} onClick={onFlip}>
 			<div className="card-body">
