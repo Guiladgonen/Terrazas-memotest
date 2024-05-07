@@ -34,6 +34,7 @@ function App() {
 			return;
 		}
 		if (selection.length < 2) {
+			// @ts-ignore
 			setSelection([...selection, card]);
 		}
 	};
