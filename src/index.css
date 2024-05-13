@@ -1,14 +1,14 @@
 @font-face {
 	font-family: 'LEMONMILKPro-Regular';
-	src:
-		local('LEMONMILKPro-Regular'),
-		url(./fonts/LEMONMILKPro-Regular.otf) format('otf');
+	src: url(./fonts/LEMONMILKPro-Regular.otf);
 }
 @font-face {
 	font-family: 'LEMONMILKPro-Bold';
-	src:
-		local('LEMONMILKPro-Bold'),
-		url(./fonts/LEMONMILKPro-Bold.otf) format('otf');
+	src: url(./fonts/LEMONMILKPro-Bold.otf);
+}
+@font-face {
+	font-family: 'Futura-Light';
+	src: url(./fonts/futural.ttf);
 }
 
 :root {
@@ -32,6 +32,7 @@ body {
 	place-items: center;
 	width: 100vw;
 	height: 100vh;
+	user-select: none;
 }
 
 #root {
@@ -57,141 +58,214 @@ body {
 	left: 0;
 }
 
-.header {
-	box-sizing: border-box;
-	padding-top: 12vh;
-	height: 32vh;
-	color: black;
-	text-align: center;
-}
+.game {
+	.header {
+		box-sizing: border-box;
+		padding-top: 12vh;
+		height: 32vh;
+		color: black;
+		text-align: center;
+	}
 
-h1 {
-	font-family: 'LEMONMILKPro-Bold';
-	padding: 0;
-	margin: 0;
-	font-size: 5vh;
-	letter-spacing: 1.4vh;
-}
+	h1 {
+		font-family: 'LEMONMILKPro-Bold';
+		padding: 0;
+		margin: 0;
+		font-size: 5vh;
+		letter-spacing: 1.4vh;
+	}
 
-h2 {
-	font-family: 'LEMONMILKPro-Regular';
-	padding: 0;
-	margin: 0;
-	font-size: 3vh;
-	letter-spacing: 1.4vh;
-}
+	h2 {
+		font-family: 'LEMONMILKPro-Regular';
+		padding: 0;
+		margin: 0;
+		font-size: 3vh;
+		letter-spacing: 1.4vh;
+	}
 
-.cards {
-	display: grid;
-	grid-template-columns: repeat(7, 1fr);
-	gap: 2vh;
-	height: 50vh;
-	width: calc(50vh / 3 * 7);
-	margin: 0 auto;
-}
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 2vh;
+		height: 50vh;
+		width: calc(50vh / 3 * 7);
+		margin: 0 auto;
+	}
 
-.card {
-	perspective: 100vh;
-}
+	.card {
+		perspective: 100vh;
+	}
 
-.card-body {
-	transform-style: preserve-3d;
-	transition: 0.5s transform;
-}
+	.card-body {
+		transform-style: preserve-3d;
+		transition: 0.5s transform;
+	}
 
-.card.flipped .card-body {
-	transform: rotateY(-180deg);
-}
+	.card.flipped .card-body {
+		transform: rotateY(-180deg);
+	}
 
-.card-front,
-.card-back {
-	backface-visibility: hidden;
-}
+	.card-front,
+	.card-back {
+		backface-visibility: hidden;
+	}
 
-.card-front {
-	padding: 14%;
-}
+	.card-front {
+		padding: 14%;
+	}
 
-.card-back {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
+	.card-back {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transform: rotateY(-180deg);
+	}
+
+	/* Make it Pretty */
+
+	.card {
+		display: flex;
+		transition: transform calc(0.5s / 4);
+		text-decoration: none;
+		color: inherit;
+		height: 100%;
+		width: 100%;
+	}
+
+	.card:active {
+		transform: scale(0.975);
+	}
+
+	.card-body {
+		border-radius: 0.25rem;
+		flex: 1;
+		height: 100%;
+		width: 100%;
+	}
+
+	.card-front,
+	.card-back {
+		box-shadow: 0.5vh 0.1vh 1vh 0 rgba(65, 66, 66, 0.55);
+		display: flex;
+		align-items: center;
+		background-color: white;
+		box-sizing: border-box;
+		height: 100%;
+		width: 100%;
+	}
+
+	.card-front {
+		font-size: 1.5rem;
+	}
+
+	.card-back {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		display: block;
+		padding: 6%;
+	}
+
+	.card-back img {
+		height: 100%;
+		display: block;
+		margin: auto;
+	}
+
+	.color0 {
+		background: #c26b00;
+	}
+	.color1 {
+		background: #977d75;
+	}
+	.color2 {
+		background: #d1c5aa;
+	}
+
+	.color0 img {
+		filter: invert(100%);
+	}
+	.color1 img {
+		filter: invert(100%);
+	}
+	.infoText {
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		font-family: 'LEMONMILKPro-Regular';
+		font-size: 5vh;
+		text-transform: uppercase;
+		color: #c26b00;
+		text-stroke: black 0.2vh;
+		-webkit-text-stroke: black 0.2vh;
+		padding: 2vh;
+		background: #fffa;
+	}
+}
+video {
+	position: fixed;
 	left: 0;
-	transform: rotateY(-180deg);
+	top: 0;
+	width: 100vw;
+	height: 100vh;
 }
 
-/* Make it Pretty */
+.button {
+	display: inline-block;
+	border-radius: 100px;
+	background-color: #c26b00;
+	border: white 0.5vh solid;
+	outline: #c26b00 0.5vh solid;
+	font-size: 3vh;
+	text-transform: uppercase;
+	padding: 1vh 4vh;
+	min-width: 12vh;
+	margin: 0 auto;
+	box-shadow: 0 0 1vh 0.5vh #c26b00;
+	color: white;
+}
 
-.card {
-	display: flex;
-	transition: transform calc(0.5s / 4);
-	text-decoration: none;
-	color: inherit;
-	height: 100%;
+.buttonsWrapper {
+	position: absolute;
+	left: 0;
 	width: 100%;
+	bottom: 20vh;
 }
 
-.card:active {
-	transform: scale(0.975);
-}
-
-.card-body {
-	border-radius: 0.25rem;
-	flex: 1;
-	height: 100%;
-	width: 100%;
-}
-
-.card-front,
-.card-back {
-	-webkit-box-shadow: 3px 1px 8px 0px rgba(65, 66, 66, 0.55);
-	-moz-box-shadow: 3px 1px 8px 0px rgba(65, 66, 66, 0.55);
-	box-shadow: 3px 1px 8px 0px rgba(65, 66, 66, 0.55);
-	display: flex;
-	align-items: center;
-	background-color: white;
-	box-sizing: border-box;
-	height: 100%;
-	width: 100%;
-}
-
-.card-front {
-	font-size: 1.5rem;
-}
-
-.card-back {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	display: block;
-}
-
-.card-back img {
-	width: 100%;
-	height: 100%;
-	display: block;
-}
-
-.shadow {
-	-webkit-box-shadow: 3px 1px 8px 0px rgba(65, 66, 66, 0.55);
-	-moz-box-shadow: 3px 1px 8px 0px rgba(65, 66, 66, 0.55);
-	box-shadow: 3px 1px 8px 0px rgba(65, 66, 66, 0.55);
-}
-
-.color0 {
-	background: #c26b00;
-}
-.color1 {
-	background: #977d75;
-}
-.color2 {
-	background: #d1c5aa;
-}
-
-.color0 img {
-	filter: invert(100%);
-}
-.color1 img {
-	filter: invert(100%);
+.description {
+	color: black;
+	p {
+		font-family: 'Futura-Light';
+		font-size: 3vh;
+		padding: 1vh;
+	}
+	h3 {
+		font-family: 'LEMONMILKPro-Regular';
+		font-size: 2vh;
+		text-transform: uppercase;
+	}
+	h1 {
+		color: #c26b00;
+		font-family: 'LEMONMILKPro-Regular';
+		font-size: 5vh;
+		text-transform: uppercase;
+	}
+	h2 {
+		font-family: 'LEMONMILKPro-Regular';
+		font-size: 5vh;
+		text-transform: uppercase;
+	}
+	.buttons {
+		display: inline-flex;
+		gap: 10vh;
+	}
+	.buttonsWrapper {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		bottom: 20vh;
+	}
 }
