@@ -254,7 +254,7 @@ body {
 
 	p {
 		font-family: 'Futura-Medium';
-		font-size: 2.2vw;
+		font-size: 2vw;
 		padding: 0;
 		margin: 0;
 	}
@@ -289,7 +289,7 @@ body {
 	}
 	img {
 		margin: 2vw 0;
-		height: 37vw;
+		height: 35vw;
 	}
 	.buttons {
 		display: inline-flex;
