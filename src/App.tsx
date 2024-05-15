@@ -20,6 +20,8 @@ const cardImageBig = [card1b, card2b, card3b, card4b, card5b];
 
 type Page = 1 | 2 | 3;
 
+type Lives = 0 | 1 | 2 | 3;
+
 type CardOption = 1 | 2 | 3 | 4 | 5;
 
 const basicCards: CardOption[] = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
@@ -32,7 +34,8 @@ function App() {
 	const [page, setPage] = useState<Page>(1);
 	const [cards, setCards] = useState<CardOption[]>([]);
 	const [selection, setSelection] = useState<[CardIndex?, CardIndex?]>([]);
-	const [chance, setChance] = useState<1 | 2>(1);
+	const [corrects, setCorrects] = useState<CardIndex[]>([]);
+	const [lives, setLives] = useState<Lives>(3);
 	const [winningCard, setWinningCard] = useState<CardOption>();
 	const [infoText, setInfoText] = useState('');
 
@@ -49,32 +52,38 @@ function App() {
 			if (equalSelection) {
 				// Save winning card for next screen
 				setWinningCard(selected1);
+				// @ts-ignore (selection has never undefined elements)
+				setCorrects([...corrects, ...selection]);
+				// Restore table state
+				setSelection([]);
+				// Show wine description
+				setTimeout(() => nextPage(), 1000);
 			} else {
 				// Show one more chance text when first attempt
-				chance === 1 && setTimeout(() => setInfoText('Tenés una chance más.'), 1000);
+				lives > 0 && setTimeout(() => setInfoText(`Tenés ${lives} chance${lives > 1 ? 's' : ''} más.`), 1000);
+				setAsyncTimeout(() => {
+					// Unflip cards
+					setSelection([]);
+				}, 1500).then(() => {
+					if (lives === 0) {
+						// Show you loose message
+						nextPage();
+					} else {
+						// Go for the next attempt
+						setAsyncTimeout(() => {}, 700).then(() => {
+							setInfoText('');
+							setLives((lives - 1) as Lives);
+						});
+					}
+				});
 			}
-			setAsyncTimeout(() => {
-				// Unflip cards
-				setSelection([]);
-			}, 1500).then(() => {
-				if (equalSelection || chance === 2) {
-					// Show wine description or you loose message
-					nextPage();
-				} else {
-					// Go for second attempt
-					setAsyncTimeout(() => {}, 700).then(() => {
-						setInfoText('');
-						setChance(2);
-					});
-				}
-			});
 		}
 	}, [selection.length]);
 
 	// Handles
 
 	const handleFlip = (card: CardIndex) => () => {
-		if (selection.includes(card)) {
+		if (selection.includes(card) || corrects.includes(card)) {
 			return;
 		}
 		if (selection.length < 2) {
@@ -93,9 +102,14 @@ function App() {
 	const playGame = () => {
 		setCards(shuffleCards(basicCards));
 		setPage(2);
-		setChance(1);
+		setLives(3);
+		setCorrects([]);
 		setWinningCard(undefined);
 		setSelection([]);
+	};
+	const continueGame = () => {
+		nextPage(2);
+		setWinningCard(undefined);
 	};
 
 	return (
@@ -109,7 +123,13 @@ function App() {
 						</div>
 						<div className="cards">
 							{cards.map((card, i) => (
-								<Card value={card} key={i} onFlip={handleFlip(i)} flipped={selection.includes(i)} color={(i < 14 ? i % 3 : (i + 1) % 3) as 1 | 2 | 3} />
+								<Card
+									value={card}
+									key={i}
+									onFlip={handleFlip(i)}
+									flipped={selection.includes(i) || corrects.includes(i)}
+									color={(i < 14 ? i % 3 : (i + 1) % 3) as 1 | 2 | 3}
+								/>
 							))}
 						</div>
 						{Boolean(infoText) && <div className="infoText">{infoText}</div>}
@@ -127,6 +147,24 @@ function App() {
 								{texts[winningCard].description.map((p) => (
 									<p>{p}</p>
 								))}
+								<div className="buttonsWrapper">
+									<div className="buttons">
+										{corrects.length === 10 ? (
+											<>
+												<div className="button buttonPlay" onClick={playGame}>
+													Jugar
+												</div>
+												<div className="button buttonPlay" onClick={() => nextPage(1)}>
+													Video
+												</div>
+											</>
+										) : (
+											<div className="button buttonPlay" onClick={continueGame}>
+												Continuar
+											</div>
+										)}
+									</div>
+								</div>
 							</>
 						) : (
 							<>
@@ -137,22 +175,22 @@ function App() {
 									Esperamos que sigas disfrutando de nuestros vinos.
 								</p>
 								<h1>&nbsp;</h1>
+								<div className="buttonsWrapper">
+									<div className="buttons">
+										<div className="button buttonPlay" onClick={() => playGame()}>
+											Jugar
+										</div>
+										<div className="button buttonPlay" onClick={() => nextPage(1)}>
+											Video
+										</div>
+									</div>
+								</div>
 							</>
 						)}
-						<div className="buttonsWrapper">
-							<div className="buttons">
-								<div className="button buttonPlay" onClick={() => playGame()}>
-									Jugar
-								</div>
-								<div className="button buttonPlay" onClick={() => nextPage(1)}>
-									Video
-								</div>
-							</div>
-						</div>
 					</div>
 				) : (
 					<div className="video" onClick={() => playGame()}>
-						<video width="1920" height="1080" autoPlay muted>
+						<video width="1920" height="1080" autoPlay muted loop>
 							<source src={video} type="video/mp4" />
 						</video>
 						<div className="buttonsWrapper">
