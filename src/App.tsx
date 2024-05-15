@@ -4,14 +4,19 @@ import logo from './assets/logo.svg';
 import card1 from './assets/card_1.png';
 import card2 from './assets/card_2.png';
 import card3 from './assets/card_3.png';
-import card4 from './assets/card_4.jpg';
+import card4 from './assets/card_4.png';
 import card5 from './assets/card_5.png';
 import video from './assets/video.mp4';
+import card1b from './assets/card_1b.png';
+import card2b from './assets/card_2b.png';
+import card3b from './assets/card_3b.png';
+import card4b from './assets/card_4b.png';
+import card5b from './assets/card_5b.png';
 import { texts } from './texts';
 import { setAsyncTimeout } from './setAsyncTimeOut';
 
 const cardImage = [card1, card2, card3, card4, card5];
-const cardImageBig = [card1, card2, card3, card4, card5];
+const cardImageBig = [card1b, card2b, card3b, card4b, card5b];
 
 type Page = 1 | 2 | 3;
 
