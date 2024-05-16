@@ -123,7 +123,7 @@ function App() {
 				<img src={card3} />
 				<img src={card4} />
 				<img src={card5} />
-				<img src={card1} />
+				<img src={card1b} />
 				<img src={card2b} />
 				<img src={card3b} />
 				<img src={card4b} />
