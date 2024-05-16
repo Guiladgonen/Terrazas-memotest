@@ -68,8 +68,8 @@ body {
 .game {
 	.header {
 		box-sizing: border-box;
-		padding-top: 10vw;
-		height: 25vw;
+		padding-top: 8vw;
+		height: 22vw;
 		color: black;
 		text-align: center;
 		display: flex;
@@ -99,12 +99,18 @@ body {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 1.5vw;
-		height: 64vw;
+		height: 70vw;
 		width: 30vw;
 		margin: 0 auto;
 	}
 
 	.card {
+		display: flex;
+		transition: transform calc(0.5s / 4);
+		text-decoration: none;
+		color: inherit;
+		height: 100%;
+		width: 100%;
 		perspective: 100vw;
 	}
 
@@ -115,35 +121,6 @@ body {
 
 	.card.flipped .card-body {
 		transform: rotateY(-180deg);
-	}
-
-	.card-front,
-	.card-back {
-		backface-visibility: hidden;
-	}
-
-	.card-front {
-		padding: 14%;
-	}
-
-	.card-back {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		transform: rotateY(-180deg);
-	}
-
-	/* Make it Pretty */
-
-	.card {
-		display: flex;
-		transition: transform calc(0.5s / 4);
-		text-decoration: none;
-		color: inherit;
-		height: 100%;
-		width: 100%;
 	}
 
 	.card:active {
@@ -162,28 +139,43 @@ body {
 		box-shadow: 0.5vw 0.1vw 1vw 0 rgba(65, 66, 66, 0.55);
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		background-color: white;
 		box-sizing: border-box;
 		height: 100%;
 		width: 100%;
+		backface-visibility: hidden;
 	}
 
 	.card-front {
+		padding: 14%;
 		font-size: 1.5rem;
 	}
 
 	.card-back {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 		padding: 6%;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8vh;
+		transform: rotateY(-180deg);
 	}
 
 	.card-back img {
-		height: 100%;
+		height: 9.2vw;
 		display: block;
 		margin: auto;
+	}
+
+	.card-back .card-back-text {
+		font-family: 'Futura-Medium';
+		font-size: 1.8vh;
+		color: #000;
+		min-height: 0;
 	}
 
 	.color0 {

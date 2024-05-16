@@ -108,12 +108,24 @@ function App() {
 		setSelection([]);
 	};
 	const continueGame = () => {
-		nextPage(2);
 		setWinningCard(undefined);
+		nextPage(corrects.length === 10 ? 3 : 2);
 	};
 
 	return (
 		<div className="container">
+			<div className="preLoadImages" style={{ opacity: 0 }}>
+				<img src={card1} />
+				<img src={card2} />
+				<img src={card3} />
+				<img src={card4} />
+				<img src={card5} />
+				<img src={card1} />
+				<img src={card2b} />
+				<img src={card3b} />
+				<img src={card4b} />
+				<img src={card5b} />
+			</div>
 			<div className={`container2 ${window.location.hash === '#flip' ? 'flip' : ''}`}>
 				{page === 2 ? (
 					<div className="game">
@@ -149,31 +161,33 @@ function App() {
 								))}
 								<div className="buttonsWrapper">
 									<div className="buttons">
-										{corrects.length === 10 ? (
-											<>
-												<div className="button buttonPlay" onClick={playGame}>
-													Jugar
-												</div>
-												<div className="button buttonPlay" onClick={() => nextPage(1)}>
-													Video
-												</div>
-											</>
-										) : (
-											<div className="button buttonPlay" onClick={continueGame}>
-												Continuar
-											</div>
-										)}
+										<div className="button buttonPlay" onClick={continueGame}>
+											Continuar
+										</div>
 									</div>
 								</div>
 							</>
 						) : (
 							<>
-								<h1>Oh… perdiste.</h1>
-								<h1>&nbsp;</h1>
-								<p>
-									Muchas gracias por participar. <br />
-									Esperamos que sigas disfrutando de nuestros vinos.
-								</p>
+								{corrects.length === 10 ? (
+									<>
+										<h1>¡Ganaste,</h1>
+										<h1>felicitaciones!</h1>
+										<h1>&nbsp;</h1>
+										<p>
+											Te invitamos a recibir tu premio <br />y seguir disfrutando de nuestros vinos.
+										</p>
+									</>
+								) : (
+									<>
+										<h1>Oh… perdiste.</h1>
+										<h1>&nbsp;</h1>
+										<p>
+											Muchas gracias por participar. <br />
+											Esperamos que sigas disfrutando de nuestros vinos.
+										</p>
+									</>
+								)}
 								<h1>&nbsp;</h1>
 								<div className="buttonsWrapper">
 									<div className="buttons">
@@ -218,6 +232,7 @@ function Card({ value, onFlip, flipped, color }: CardProps) {
 				</div>
 				<div className="card-back">
 					<img src={cardImage[value - 1]} />
+					<div className="card-back-text">{`${texts[value].category} ${texts[value].variety}`}</div>
 				</div>
 			</div>
 		</div>

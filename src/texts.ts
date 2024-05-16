@@ -2,7 +2,7 @@ export const texts = [
 	{ description: [] }, // Use 1-based array
 	{
 		category: 'Reserva',
-		variety: 'Malbec ROSÉ',
+		variety: 'Malbec Rosé',
 		description: [
 			'Nuestro fresco y sutil Malbec Rosé, proviene de las uvas que cultivamos orgánicamente en el Valle de Uco. Se pueden percibir aromas de fruta fresca como pomelo rosado, pera y frambuesa.',
 			'Ideal para acompañar frutos de mar, carnes blancas, ensaladas frescas y quesos ahumados.'
