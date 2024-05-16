@@ -114,7 +114,10 @@ function App() {
 
 	return (
 		<div className="container">
-			<div className="preLoadImages" style={{ opacity: 0 }}>
+			<div className="preLoad" style={{ opacity: 0 }}>
+				<div style={{ fontFamily: 'LEMONMILKPro-Regular' }}>CARGANDO...</div>
+				<div style={{ fontFamily: 'LEMONMILKPro-bold' }}>CARGANDO...</div>
+				<div style={{ fontFamily: 'Futura-Medium' }}>CARGANDO...</div>
 				<img src={card1} />
 				<img src={card2} />
 				<img src={card3} />
