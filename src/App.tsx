@@ -60,7 +60,7 @@ function App() {
 				setTimeout(() => nextPage(), 1000);
 			} else {
 				// Show one more chance text when first attempt
-				lives > 0 && setTimeout(() => setInfoText(`Tenés ${lives} chance${lives > 1 ? 's' : ''} más.`), 1000);
+				lives > 0 && setTimeout(() => setInfoText(`Tenés ${lives} chance${lives > 1 ? 's' : ''} más`), 1000);
 				setAsyncTimeout(() => {
 					// Unflip cards
 					setSelection([]);
