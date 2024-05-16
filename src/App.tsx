@@ -128,6 +128,7 @@ function App() {
 				<img src={card3b} />
 				<img src={card4b} />
 				<img src={card5b} />
+				<img src={logo} />
 			</div>
 			<div className={`container2 ${window.location.hash === '#flip' ? 'flip' : ''}`}>
 				{page === 2 ? (
