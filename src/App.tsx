@@ -184,7 +184,8 @@ function App() {
 									</>
 								) : (
 									<>
-										<h1>Muchas gracias por participar.</h1>
+										<h1>Muchas gracias</h1>
+										<h1>por participar.</h1>
 										<h1>&nbsp;</h1>
 										<p>Te invitamos a seguir disfrutando de nuestros vinos.</p>
 									</>
