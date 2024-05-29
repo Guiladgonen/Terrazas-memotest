@@ -20,11 +20,11 @@ const cardImageBig = [card1b, card2b, card3b, card4b, card5b];
 
 type Page = 1 | 2 | 3;
 
-type Lives = 0 | 1 | 2 | 3;
+type Lives = 0 | 1 | 2 | 3 | 4;
 
 type CardOption = 1 | 2 | 3 | 4 | 5;
 
-const basicCards: CardOption[] = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
+const basicCards: CardOption[] = [1, 2, 4, 5, 1, 2, 4, 5];
 
 function App() {
 	// Types
@@ -35,7 +35,7 @@ function App() {
 	const [cards, setCards] = useState<CardOption[]>([]);
 	const [selection, setSelection] = useState<[CardIndex?, CardIndex?]>([]);
 	const [corrects, setCorrects] = useState<CardIndex[]>([]);
-	const [lives, setLives] = useState<Lives>(3);
+	const [lives, setLives] = useState<Lives>(4);
 	const [winningCard, setWinningCard] = useState<CardOption>();
 	const [infoText, setInfoText] = useState('');
 
@@ -102,14 +102,14 @@ function App() {
 	const playGame = () => {
 		setCards(shuffleCards(basicCards));
 		setPage(2);
-		setLives(3);
+		setLives(4);
 		setCorrects([]);
 		setWinningCard(undefined);
 		setSelection([]);
 	};
 	const continueGame = () => {
 		setWinningCard(undefined);
-		nextPage(corrects.length === 10 ? 3 : 2);
+		nextPage(corrects.length === basicCards.length ? 3 : 2);
 	};
 
 	return (
@@ -173,7 +173,7 @@ function App() {
 							</>
 						) : (
 							<>
-								{corrects.length === 10 ? (
+								{corrects.length === basicCards.length ? (
 									<>
 										<h1>¡Ganaste,</h1>
 										<h1>felicitaciones!</h1>
