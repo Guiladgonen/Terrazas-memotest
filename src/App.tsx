@@ -6,7 +6,7 @@ import card2 from './assets/card_2.png';
 import card3 from './assets/card_3.png';
 import card4 from './assets/card_4.png';
 import card5 from './assets/card_5.png';
-import video from './assets/video_original.mp4';
+import video from './assets/video_final.mp4';
 import card1b from './assets/card_1b.png';
 import card2b from './assets/card_2b.png';
 import card3b from './assets/card_3b.png';
